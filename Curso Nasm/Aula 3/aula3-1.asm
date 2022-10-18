@@ -1,4 +1,3 @@
-;%include "io.inc"
 ;Segment é apenas uma subseção de uma section
 segment .data 
     LF          equ 0xA ; Line Feed  - Quebra de linha \n  
@@ -14,30 +13,45 @@ segment .data
     STD_OUT     equ 0x1 ; Saída padrão
 
 section .data
-    msg db "Entre com o seu nome: ", LF, NULL
-    tam equ $- msg
-    
+	x dd 10 ; db=1 dw=2 dd=4 dq=4 dt=10
+	y dd 50
+	msg1 db 'X maior que Y', LF, NULL
+	tam1 equ $ -msg1
+	msg2 db 'Y maior que X', LF, NULL
+	tam2 equ $ -msg2
 section .bss
-    nome resb 1
     
 section .text
 global _start
 _start:
+	mov eax, DWORD[x]
+	mov ebx, DWORD[y]
+	;if - condição
+	cmp eax, ebx ;Salto condicional
+	;je = , jge >= , jg >, jle <= , jl < , jne !=
+	jge maior ; eax >= ebx
+	mov ecx, msg2
+	mov edx, tam2
+	;Salto incondicional
+	jmp final
 
-    ;saida
-    mov eax, SYS_WRITE
-    mov ebx, STD_OUT
-    mov ecx, msg 
-    mov edx, tam
-    int SYS_CALL
-    ;entrada
-    mov eax, SYS_READ
-    mov ebx, STD_IN
-    mov ecx, nome
-    mov edx, 0xA
-    int SYS_CALL
-    ;finaliza programa
-    mov eax, SYS_EXIT
-    mov ebx, RET_EXIT
-    int SYS_CALL
+maior:
+	mov ecx, msg1
+	mov edx, tam1
+
+final:
+	mov eax, SYS_WRITE
+	mov ebx, STD_OUT
+	int SYS_CALL
+
+	mov eax, SYS_EXIT
+	mov ebx, RET_EXIT ; ou xor ebx, ebx -> == 0
+	int SYS_CALL
+	
+
+
+
+
+
+
 

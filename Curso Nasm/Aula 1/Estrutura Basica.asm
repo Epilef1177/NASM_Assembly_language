@@ -1,4 +1,4 @@
-    ;compilador
+    ;;compilador
         ;nasm -f elf64 'nome.programa'
     ;Linkeditar - transformar o progrma de linguagem de máquina para um executável
         ;ld -s -o 'nomeprogramabin' 'nomeprogramabin.o'
