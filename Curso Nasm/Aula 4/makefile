@@ -1,4 +1,4 @@
-NOME = aula4
+NOME = converter
 
 all: $(NOME).o
 	ld -s -o $(NOME) $(NOME).o

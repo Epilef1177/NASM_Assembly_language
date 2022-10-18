@@ -1,5 +1,5 @@
 segment .data
-	LF	  	equ 0xA
+	LF	  		equ 0xA
 	NULL	  	equ 0xD
 	SYS_CALL  	equ 0x80
 	;eax
