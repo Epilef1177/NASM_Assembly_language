@@ -27,7 +27,7 @@ _start:
 	mov [esi], dl
 
 	dec esi
-	mov dl, 0x25
+	mov dl, 0x25		;U(0x25)
 	add dl, '0'
 	mov [esi], dl
 
