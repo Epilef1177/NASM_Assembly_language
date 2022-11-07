@@ -1,28 +1,51 @@
-%include 'biblioteca.inc'
+;compilar:      nasm -f elf64 'nome.programa'
+;linkeditar:    ld -s -o 'nomeprogramabin' 'nomeprogramabin.o'
 
-section .data
-    v1 dw '105', LF, NULL
+segment .data
+	LF	  	equ 0xA
+	NULL	  	equ 0xD
+	SYS_CALL  	equ 0x80
+	;eax
+	SYS_EXIT  	equ 0x1
+	SYS_READ  	equ 0x3
+	SYS_WRITE 	equ 0x4
+	;ebx
+	RET_EXIT  	equ 0x0
+	STD_IN		equ 0x0
+	STD_OUT		equ 0x1
 
-section .text
-global _start
-_start:
-    call converter_valor
-    call mostrar_valor
+	TAM_BUFFER equ 0xA
 
-    mov eax, SYS_EXIT
-    mov ebx, RET_EXIT
-    int SYS_CALL
+segment .bss
+	BUFFER resb 0x1
 
-converter_valor:
-    lea esi, [v1]               ;associa a variável 'v1' do .bss com o esi
-    mov ecx, 0x3                ;passamos o tamanho da string para a função string_to_int saber a quantidade de loops
+segment .text
+
+output_buffer_eax:
+	mov eax, SYS_WRITE
+	mov ebx, STD_OUT
+	mov ecx, BUFFER
+	mov edx, TAM_BUFFER
+	int SYS_CALL
+	ret
+
+convert_value_esi:                 ;antes de chamar essa função é preciso fazer os próximos dois comandos na unha, especificando qual é a "variável" (que no caso usamos v1 como exemplo) e qual o tamanho dela (comprimento)
+    ;lea esi, [v1]               ;associa a variável 'v1' do .bss com o esi
+    ;mov ecx, 0x3                ;passamos o tamanho da string para a função string_to_int saber a quantidade de loops
     call string_to_int
-    add eax, 0x2                ;adicionou 2 só para fazer graça
     ret
 
-mostrar_valor:
+show_string:                    ;declarar os valores de ECX (qual string) e os de EDX (qual o tamanho da string) antes de chamar
+    mov eax, SYS_WRITE
+    mov ebx, STD_OUT
+    ;mov ecx, string
+    ;mov edx, range_tam
+    int SYS_CALL
+    ret
+
+show_value_eax:
     call int_to_string
-    call saidaResultado
+    call output_buffer_eax
     ret
 
 ;-------------------------------------------|
@@ -62,4 +85,10 @@ int_to_string:
     mov [esi], dl
     test eax, eax
     jnz .prox_digitoIS		;jnz = não é zero
+    ret
+
+ending_program:
+    mov eax, SYS_EXIT
+    mov ebx, RET_EXIT
+    int SYS_CALL
     ret
