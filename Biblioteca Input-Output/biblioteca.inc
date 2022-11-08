@@ -61,7 +61,7 @@ string_to_int:
     inc esi                     ;seleciona o endereço do dígito desejado
     sub al, '0'                 ;transforma para inteiro
     imul ebx, 0xA               ;ebx = ebx * 10
-    add ebx, eax                ;ebc = ebx + eax
+    add ebx, eax                ;ebx = ebx + eax
     loop .prox_digitoSI         ;while (--ecx)
     mov eax, ebx
     ret
