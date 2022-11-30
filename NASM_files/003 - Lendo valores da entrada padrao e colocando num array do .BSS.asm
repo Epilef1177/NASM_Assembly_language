@@ -12,7 +12,7 @@ section .bss
 section .text
 global CMAIN
 CMAIN:
-    mov ebp, esp; for correct debugging
+    mov ebp, esp    ; for correct debugging
 
 ;preparando os registradores com os valores desejados
     xor eax, eax    ;eax = 0
@@ -23,7 +23,7 @@ CMAIN:
 ;recebe valores da entrada padrão, armazena no vetor do .data e imprime eles na saída padrão
 inicio: 
     cmp ecx,0                   ;compara ecx com 0
-    je fim                      ;se ecx = 0 pula para o label 'fim'
+    je fim                       ;se ecx = 0 pula para o label 'fim'
     GET_DEC 2, eax              ;eax = entrada padrão
     mov [vetor+ebx], eax        ;vetor[ebx] = eax
     PRINT_DEC 2,[vetor+ebx]     ;print(vetor[ebx])

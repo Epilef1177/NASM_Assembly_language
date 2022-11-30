@@ -7,28 +7,17 @@ section .bss
 section .text
 global CMAIN
 CMAIN:
-    mov ebp, esp; for correct debugging
+    ;pega uma string da entrada padrão, salva ela num array e imprime na saída padrão
+    mov ebp, esp            ; for correct debugging
     GET_STRING  name, 100   ;GET_STRING data (variable), maxsz (length less than)
     PRINT_STRING name       ;print(name)
     NEWLINE
     
+    ;AINDA NÃO FUNCIONA ESSA PARTE
     ;movsb nome, name
-    lodsb 
-    PRINT_STRING nome
-    
-    ;ajuda de sérgio
-    ;mov edi, name
-    ;mov esi, 'm'
-    ;mosvb 
-    ;PRINT_STRING name
-    ;NEWLINE
-    
-    
-    ;meu código aleatório
-    ;mov eax, 0
-    ;mov [nome+0], eax
-    ;add nome, \0
+    ;lodsb 
     ;PRINT_STRING nome
-    ;fim
+    
+_ending_program:
     xor eax, eax
     ret
