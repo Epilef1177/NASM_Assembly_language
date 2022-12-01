@@ -50,12 +50,14 @@ _next1:
     PRINT_CHAR   zero1              ;como só é um símbolo de fim de string não imprime nada
     NEWLINE
     
+    ;primeira forma de contar o tamanho da string
     mov esi, zero                   ;esi = zero     |       aponta para o primeiro valor de zero 0
     mov edi, hello                  ;edi = "H"      |       aponta para o primeiro endereço de hello
     call size_string                ;chama a função "size_string:" que calcula o tamanho da string colocada no edi + 1
     PRINT_DEC 2, [arrayRD]          ;imprime o tamanho da string colocada na 1ª posição do arrayRD
     NEWLINE
     
+    ;segunda forma de contar o tamanho da string
     mov esi, zero1                  ;esi = zero     |       aponta para o primeiro valor de zero1 0
     mov edi, hello                  ;edi = "H"      |       aponta para o primeiro endereço de hello
     call size_string1               ;chama a função "size_string:" que calcula o tamanho da string colocada no edi corretamente
