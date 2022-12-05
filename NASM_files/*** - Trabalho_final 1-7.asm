@@ -1,14 +1,16 @@
+;ALUNOS: FELIPE DE SANTANA ANGELO FERREIRA (220115562), GUSTAVO JORGE NOVAES SILVA (220216974) e TAUANE PEREIRA SALES (220216969)
+
 ;Entrada: Qual e a importancia da escola na democratizacao da sociedade
 %include "io.inc"
 section .data
     ;(*  QUESTÃO)
-    resposta1            db           "Resposta da 1ª questão:", 0xA, 0x0
-    resposta2            db 0xa, 0xA, "Resposta da 2ª questão:", 0xA, 0x0
-    resposta3            db      0xA, "Resposta da 3ª questão:", 0xA, 0x0
-    resposta4            db 0xa, 0xA, "Resposta da 4ª questão:", 0xA, 0x0
-    resposta5            db 0xa, 0xA, "Resposta da 5ª questão:", 0xA, 0x0
-    resposta6            db 0xa, 0xA, "Resposta da 6ª questão:", 0xA, 0x0
-    resposta7            db 0xa, 0xA, "Resposta da 7ª questão:", 0xA, 0x0
+    resposta1            db           "Resposta da primeira questao:", 0xA, 0x0
+    resposta2            db 0xa, 0xA, "Resposta da segunda questao:", 0xA, 0x0
+    resposta3            db      0xA, "Resposta da terceira questao:", 0xA, 0x0
+    resposta4            db 0xa, 0xA, "Resposta da quarta questao:", 0xA, 0x0
+    resposta5            db 0xa, 0xA, "Resposta da quinta questao:", 0xA, 0x0
+    resposta6            db 0xa, 0xA, "Resposta da sexta questao:", 0xA, 0x0
+    resposta7            db 0xa, 0xA, "Resposta da setima questao:", 0xA, 0x0
     
     ;(2ª QUESTÃO)
     quantidade_letter   db "Quantidade de ", 0x0
@@ -220,7 +222,7 @@ MAIUSCULA_MENUSCULA:
     lodsb                                           ;eax = esi[0]*
     mov edi, sub_entrada                            ;edi = sub_entrada[0]*
     mov ebx, 0                                      ;ebx = 0                |   Variará entre 0 e 5, quando o ebx <= 2, a letra ficará maiúscula, quando o ebx > 2 a letra continuará menúscula
-    mov ecx, 40                                     ;ecx = 38               |   Quantidade total de caracteres na string, útil para não transformar caracteres em lixo eletrônico (caracteres incompreensíveis)
+    mov ecx, 40                                     ;ecx = 40               |   Quantidade total de caracteres na string, útil para não transformar caracteres em lixo eletrônico (caracteres incompreensíveis)
     PRINT_STRING resposta5                          ;imprimindo retorno
 
 _transformar_para_maiuscula:
@@ -273,7 +275,7 @@ POSICAO_ALFA_NUMERICA:
 
     mov esi, sub_entrada            ;esi = sub_entrada[0]*  | 1º endereço da string "sub_entrada" vai para o esi, que atua como um ponteiro
     mov edi, frequencyCounter       ;edi = frequencyCounter[0]* | edi atua como ponteiro para primeira posição de "frequencyCounter"
-    mov ecx, 40                     ;ecx = 40  |   ecx = tamanho da sub_string principal
+    mov ecx, 41                     ;ecx = 41  |   ecx = tamanho da sub_string principal
     cld                             ;df = 0     |   percorre a string da esquerda para a direita
     PRINT_STRING resposta6
     
@@ -375,7 +377,7 @@ ORDENAR_MEDIA:
 ;--->Imprimindo o vetor 'posicoesCrescentes' | parâmetros para chamar a função "imprimindo_vetor_posicoesCrescentes:"
    
     mov esi, posicoesCrescentes     ;esi = posicoesCrescentes[0]*  | 1º endereço do vetor "posicoesCrescentes" vai para o esi, que atua como um ponteiro
-    mov ecx, 35                     ;ecx = 35, tamanho do vetor posicoesCrescentes
+    mov ecx, 36                     ;ecx = 35, tamanho do vetor posicoesCrescentes
     call imprimindo_vetor_posicoesCrescentes
     
     
@@ -383,9 +385,9 @@ ORDENAR_MEDIA:
         ;Para isso, basta percorremos o vetor 'posicoesCrescentes' da direta para a esquerda (de trás para frente). A cada iteração nós copiamos o conteúdo do vetor 'posicoesCrescentes' para o vetor 'posicoesDecrescentes'
         
     mov esi, posicoesCrescentes     ;esi = posicoesCrescentes[0]*  | 1º endereço do vetor "posicoesCrescentes" vai para o esi, que atua como um ponteiro
-    add esi, 34                     ;esi = 34 |   35 é a última posição do vetor 'posicoesCrescentes'
+    add esi, 35                     ;esi = 35 |   35 é a última posição do vetor 'posicoesCrescentes'
     mov edi, posicoesDecrescentes   ;edi = posicoesDecrescentes[0]* | edi atua como ponteiro para primeira posição de "posicoesDecrescentes"
-    mov ecx, 35                     ;ecx = 35, tamanho do vetor posicoesCrescentes
+    mov ecx, 36                     ;ecx = 36, tamanho do vetor posicoesCrescentes
     xor ebx, ebx                    ;usando ebx como contador. É ele que utilizaremos para incrementar o edi a cada iteração sob o vetor 'posicoesDecrescentes'
     std                             ;df = 1     |   set direction   |   percorre a string de trás para frente quando se utiliza as palavras reservadas LOSD, STOS, SCAS e MOVS (que podem ter terminações B, W e D)
     
@@ -401,7 +403,7 @@ ORDENAR_MEDIA:
      ;--->Imprimindo o vetor 'posicoesDecrescentes' e somando, a cada iteração, seus elementos. A soma final ficará salva em edx para em seguida obtermos a média. 
      
      mov esi, posicoesDecrescentes  ;esi = posicoesDecrescentes[0]*  | 1º endereço do vetor "posicoesDecrescentes" vai para o esi, que atua como um ponteiro
-     mov ecx, 35                    ;ecx = 35, tamanho do vetor posicoesDecrescentes
+     mov ecx, 36                    ;ecx = 36, tamanho do vetor posicoesDecrescentes
      xor edx, edx                   ;edx será usado como um acumulador. Para isso, nós o resetamos. 
      cld                            ;df = 0     |   percorre a string da esquerda para a direita
         
@@ -428,6 +430,7 @@ ORDENAR_MEDIA:
      idiv ebx                       ;Realizando a divisão e salvando o resultado em eax
      PRINT_STRING msgMedia          ;saída pré-definida no .data
      PRINT_DEC 2, eax               ;imprimindo a média
+     
 
     ret
     
